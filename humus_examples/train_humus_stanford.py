@@ -55,6 +55,7 @@ def cli_main(args):
         lr_step_size=args.lr_step_size,
         lr_gamma=args.lr_gamma,
         weight_decay=args.weight_decay,
+        no_residual_learning=args.no_residual_learning,
         logger_type=args.logger_type,
     )
     
