@@ -21,7 +21,6 @@ sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute())   )
 
 import pytorch_lightning as pl
 import torch
-from fastmri.data.mri_data import fetch_dir
 from fastmri.data.subsample import create_mask_for_mask_type
 from  pl_modules.humus_module import HUMUSNetModule
 
@@ -30,8 +29,6 @@ from pl_modules.stanford_data_module import StanfordDataModule
 
 # Imports for logging and other utility
 from pytorch_lightning.plugins import DDPPlugin
-import yaml
-from utils import load_args_from_config
 
 
 def cli_main(args):

@@ -1,7 +1,6 @@
 """
 Utilities for example scripts.
 """
-import pathlib
 import yaml
 
 def load_args_from_config(args):

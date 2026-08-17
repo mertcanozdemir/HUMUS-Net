@@ -11,7 +11,6 @@ from argparse import ArgumentParser
 sys.path.insert(0, os.path.dirname(pathlib.Path(__file__).parent.absolute())   )
 
 import pytorch_lightning as pl
-from fastmri.data.mri_data import fetch_dir
 from fastmri.data.subsample import create_mask_for_mask_type
 
 from data.data_transforms import HUMUSNetDataTransform
