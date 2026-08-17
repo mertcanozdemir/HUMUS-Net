@@ -145,18 +145,11 @@ class StanfordSliceDataset(torch.utils.data.Dataset):
         return sample
     
     def _get_slice_indices(self, dataslice, num_slices_in_volume):
+        # Slices outside of the volume are replaced by the closest edge slice,
+        # so that exactly num_adj_slices indices are always returned.
         num_slices_per_side = (self.num_adj_slices - 1) // 2
         slice_idx_l, slice_idx_h = dataslice - num_slices_per_side, dataslice + num_slices_per_side
-        if slice_idx_l < 0:
-            diff = -slice_idx_l
-            slice_idx_list = list(range(0, slice_idx_h + 1))
-            for _ in range(diff):
-                slice_idx_list = [0] + slice_idx_list
-        elif slice_idx_h >= num_slices_in_volume:
-            diff = num_slices_in_volume - slice_idx_h + 1
-            slice_idx_list = list(range(slice_idx_l, num_slices_in_volume))
-            for _ in range(diff):
-                slice_idx_list = slice_idx_list + [num_slices_in_volume - 1]
-        else:
-            slice_idx_list = list(range(slice_idx_l, slice_idx_h + 1))
-        return slice_idx_list
+        return [
+            min(max(idx, 0), num_slices_in_volume - 1)
+            for idx in range(slice_idx_l, slice_idx_h + 1)
+        ]
